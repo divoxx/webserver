@@ -15,6 +15,30 @@ The long tearm goal is to provide a standard interface for frameworks and webapp
 
 [go]: http://golang.org
 
+Usage Example
+-------------
+
+Runs a webserver accepting arguments from CLI
+
+    ```go
+    package main
+
+    import (
+      "net/http"
+      "webserver"
+    )
+
+    func dispatcher(w http.ResponseWriter, r *http.Request) {
+      // do something with the request, this could dispatch
+      // the request to another component, for example.
+    }
+
+    func main() {
+      srv := webserver.New(dispatcher)
+      webserver.RunCLI(srv)
+    }
+    ```
+
 -------------
 
 Copyright (C) 2012 Rodrigo Kochenburger <divoxx@gmail.com>
