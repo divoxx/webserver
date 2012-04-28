@@ -35,7 +35,7 @@ func (srv *WebServer) Run(env Environment) error {
 	return nil
 }
 
-func RunCLI(srv WebServer) {
+func (srv *WebServer) RunCLI() {
 	var env Environment
 	env.Listen = "0.0.0.0:9000"
 	env.LogLevel = applog.LevelDebug
