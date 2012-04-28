@@ -2,6 +2,7 @@ package webserver
 
 import (
   "net/http"
+  _ "testing"
 )
 
 func ExampleRunCLI() {
