@@ -31,7 +31,7 @@ func dispatcher(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-  srv := webserver.New(dispatcher)
+  srv := webserver.New(http.HandlerFunc(dispatcher))
   webserver.RunCLI(srv)
 }
 ```
