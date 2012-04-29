@@ -7,9 +7,6 @@ For now, this library is just an abstraction for running a webserver for an [Go]
 * Logging of server behavior
 * Simple interface for running an web application
 * Handy method for running the the web app accepting parameters from CLI
-
-The long tearm goal is to provide a standard interface for frameworks and webapp, as well as the following:
-
 * Serves static files, which is handy for small apps that won't have Apache or Nginx in front of it or for development
 * Logging of requests information
 
