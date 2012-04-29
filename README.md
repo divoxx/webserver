@@ -36,6 +36,12 @@ func main() {
 }
 ```
 
+Then you can simply run the app:
+
+```bash
+./app -l="0.0.0.0:3000"
+```
+
 -------------
 
 Copyright (C) 2012 Rodrigo Kochenburger <divoxx@gmail.com>
