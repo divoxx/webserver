@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-  "time"
-  "path"
+	"path"
+	"time"
 )
 
 type Environment struct {
 	Listen       string
-  PublicFolder string
+	PublicFolder string
 	LogLevel     int
 }
 
@@ -27,7 +27,7 @@ func New(handler http.Handler) *WebServer {
 func (srv *WebServer) Run(env *Environment) error {
 	applog.Infof("Starting application")
 
-  disp := newDispatcher(srv, env)
+	disp := newDispatcher(srv, env)
 	http.Handle("/", disp)
 
 	applog.Infof("Listening to incoming connection on %s", env.Listen)
@@ -41,11 +41,11 @@ func (srv *WebServer) Run(env *Environment) error {
 }
 
 func (srv *WebServer) RunCLI() {
-  env := &Environment{
-	  Listen: "0.0.0.0:9000",
-	  LogLevel: applog.LevelDebug,
-    PublicFolder: "public",
-  }
+	env := &Environment{
+		Listen:       "0.0.0.0:9000",
+		LogLevel:     applog.LevelDebug,
+		PublicFolder: "public",
+	}
 
 	cli := flag.NewFlagSet("WebServer", flag.ExitOnError)
 	cli.StringVar(&env.Listen, "l", env.Listen, "The address to listen for incoming connections ([host]:port)")
@@ -69,12 +69,12 @@ func (srv *WebServer) RunCLI() {
 }
 
 type dispatcher struct {
-  env *Environment
-  appHandler, publicHandler http.Handler
+	env                       *Environment
+	appHandler, publicHandler http.Handler
 }
 
 func newDispatcher(srv *WebServer, env *Environment) *dispatcher {
-  return &dispatcher{env, srv.appHandler, http.FileServer(http.Dir(env.PublicFolder))}
+	return &dispatcher{env, srv.appHandler, http.FileServer(http.Dir(env.PublicFolder))}
 }
 
 func (disp *dispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request) {
@@ -100,7 +100,7 @@ func (disp *dispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		}
 	} else {
 		applog.Debugf("Dispatching %s", req.URL)
-    disp.appHandler.ServeHTTP(w, req)
+		disp.appHandler.ServeHTTP(w, req)
 	}
 
 	duration := time.Now().Sub(startTime)
