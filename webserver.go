@@ -78,7 +78,7 @@ func newDispatcher(srv *WebServer, env *Environment) *dispatcher {
 }
 
 func (disp *dispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-  dispatched := false
+	dispatched := false
 
 	startTime := time.Now()
 
@@ -92,26 +92,26 @@ func (disp *dispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		if info.IsDir() {
 			indexPath := path.Join(localPath, "index.html")
 
-      applog.Debugf("%s is a directory, checking for existance of %s", localPath, indexPath)
+			applog.Debugf("%s is a directory, checking for existance of %s", localPath, indexPath)
 
-      if _, err := os.Stat(indexPath); err == nil {
+			if _, err := os.Stat(indexPath); err == nil {
 				applog.Debugf("Serving static file %s", indexPath)
 				disp.publicHandler.ServeHTTP(w, req)
-        dispatched = true
+				dispatched = true
 			}
 
 		} else {
 			applog.Debugf("Serving static file %s", localPath)
 			disp.publicHandler.ServeHTTP(w, req)
-      dispatched = true
+			dispatched = true
 		}
 	}
 
-  if !dispatched {
-    applog.Debugf("Dispatching %s", req.URL)
-	  disp.appHandler.ServeHTTP(w, req)
-  }
+	if !dispatched {
+		applog.Debugf("Dispatching %s", req.URL)
+		disp.appHandler.ServeHTTP(w, req)
+	}
 
 	duration := time.Now().Sub(startTime)
-  applog.Infof("Finished processing %s %s (%s)", req.Method, req.URL, duration.String())
+	applog.Infof("Finished processing %s %s (%s)", req.Method, req.URL, duration.String())
 }
