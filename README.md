@@ -22,7 +22,7 @@ package main
 
 import (
   "net/http"
-  "webserver"
+  "github.com/divoxx/webserver"
 )
 
 func dispatcher(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +32,7 @@ func dispatcher(w http.ResponseWriter, r *http.Request) {
 
 func main() {
   srv := webserver.New(http.HandlerFunc(dispatcher))
-  webserver.RunCLI(srv)
+  srv.RunCLI()
 }
 ```
 
